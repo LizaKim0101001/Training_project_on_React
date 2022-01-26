@@ -73,6 +73,7 @@ export const PriceTitle = styled.p`
 `;
 
 export const Input = styled.input`
+  margin-top: 20px;
   width: 313px;
   height: 48px;
   background-color: #f7f7f7;
@@ -92,7 +93,7 @@ export const StyledButton = styled(Button)`
 
 export const ProductSwiper = styled(Swiper)`
   width: 727px;
-  margin-left:20px;
+  margin-left: 20px;
   margin-right: auto;
 
   .swiper-pagination {
