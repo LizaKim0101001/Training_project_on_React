@@ -23,7 +23,7 @@ export default function Buy({ product }) {
     product.find((product) => product.id === id)
   );
   const FullPrice = selectProducts.reduce(
-    (sum, product) => (sum += product.price),
+    (sum, product) => (sum += +product.price),
     0
   );
   const [swiperRef, setSwiperRef] = useState(null);
@@ -37,7 +37,7 @@ export default function Buy({ product }) {
   const [adress, setAdress] = useState(" ");
 
   const handleBuyClick = () => {
-    console.log(`Спасибо за заказ, вы купили:\n ${selectProducts.map(
+    console.log(`Спасибо за заказ, вы купили: \n${selectProducts.map(
       (product) => `${product.title} - ${product.price} руб.\n`
     )}
     Итого: ${FullPrice} руб.
