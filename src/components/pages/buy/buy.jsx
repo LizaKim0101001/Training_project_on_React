@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BuyCard from "../../ui/buy-card/buy-card";
 import CheckboxList from "/src/components/ui/chekbox-list/chekbox-list";
+import Popup from "/src/components/blocks/pop-up/pop-up";
 import {
   StyledSection,
   StyledInput,
@@ -34,15 +35,9 @@ export default function Buy({ product }) {
     }
   };
 
-  const [adress, setAdress] = useState(" ");
-
-  const handleBuyClick = () => {
-    console.log(`Спасибо за заказ, вы купили: \n${selectProducts.map(
-      (product) => `${product.title} - ${product.price} руб.\n`
-    )}
-    Итого: ${FullPrice} руб.
-    Доставка по адресу: ${adress}.`);
-  };
+  const [adress, setAdress] = useState("");
+  const isButtonEnable = adress;
+  const [isShow, setIsShow] = useState(false);
 
   return product && product.length ? (
     <>
@@ -71,7 +66,13 @@ export default function Buy({ product }) {
             />
             <PriceTitle>Цена </PriceTitle>
             <Price>{FullPrice} руб.</Price>
-            <StyledButton onClick={handleBuyClick}> Купить</StyledButton>
+            <StyledButton
+              onClick={() => setIsShow(true)}
+              disabled={!isButtonEnable}
+            >
+              {" "}
+              Купить
+            </StyledButton>
           </Panel>
         </div>
         <ProductSwiper
@@ -92,6 +93,13 @@ export default function Buy({ product }) {
             </SwiperSlide>
           ))}
         </ProductSwiper>
+        <Popup
+          fullPrice={FullPrice}
+          adress={adress}
+          isShow={isShow}
+          onClose={() => setIsShow(false)}
+          selectProducts={selectProducts}
+        />
       </StyledSection>
     </>
   ) : (
